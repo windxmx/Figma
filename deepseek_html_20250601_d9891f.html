@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>播客App原型</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .phone-mockup {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            background-color: #f8f9fa;
+            margin: 20px auto;
+        }
+        .screen {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .status-bar {
+            height: 44px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 12px;
+            color: #333;
+        }
+        .tab-bar {
+            height: 83px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #e5e5e5;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            font-size: 10px;
+        }
+        .tab-item.active {
+            color: #007aff;
+        }
+        .tab-item i {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .player-bar {
+            position: absolute;
+            bottom: 83px;
+            width: 100%;
+            height: 70px;
+            background-color: white;
+            border-top: 1px solid #e5e5e5;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background-color: #007aff;
+        }
+        .episode-card {
+            transition: transform 0.2s;
+        }
+        .episode-card:active {
+            transform: scale(0.98);
+        }
+        .show-card {
+            transition: transform 0.2s;
+        }
+        .show-card:active {
+            transform: scale(0.98);
+        }
+        .category-chip {
+            transition: all 0.2s;
+        }
+        .category-chip:active {
+            background-color: #007aff;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <h1 class="text-3xl font-bold text-center mb-8">播客App原型</h1>
+    
+    <div class="flex flex-wrap justify-center gap-8">
+        <!-- 首页 -->
+        <div class="phone-mockup">
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                <div class="progress-bar" style="width: 30%;"></div>
+                
+                <div class="h-full overflow-y-auto pb-24">
+                    <!-- 导航栏 -->
+                    <div class="px-5 py-4 flex justify-between items-center">
+                        <h1 class="text-2xl font-bold">首页</h1>
+                        <div class="flex space-x-4">
+                            <i class="fas fa-search text-gray-500"></i>
+                            <i class="fas fa-bell text-gray-500"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 继续收听 -->
+                    <div class="px-5 mb-6">
+                        <h2 class="text-lg font-semibold mb-3">继续收听</h2>
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden episode-card">
+                            <div class="flex">
+                                <img src="https://images.unsplash.com/photo-1593697909683-bccb1b9e68a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-24 h-24 object-cover">
+                                <div class="p-3 flex-1">
+                                    <h3 class="font-medium text-sm text-gray-500">科技乱炖</h3>
+                                    <h2 class="font-bold mb-1">Ep. 245: AI时代的个人发展</h2>
+                                    <p class="text-xs text-gray-500 line-clamp-2">本期我们讨论了在AI技术快速发展的背景下，个人如何规划职业发展路径...</p>
+                                    <div class="flex items-center mt-2">
+                                        <div class="w-full bg-gray-200 rounded-full h-1">
+                                            <div class="bg-blue-500 h-1 rounded-full" style="width: 45%"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 ml-2">32:45/72:10</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 推荐节目 -->
+                    <div class="px-5 mb-6">
+                        <h2 class="text-lg font-semibold mb-3">推荐节目</h2>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white rounded-xl shadow-sm p-3 episode-card">
+                                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full h-24 object-cover rounded-lg mb-2">
+                                <h3 class="font-medium text-sm text-gray-500">故事FM</h3>
+                                <h2 class="font-bold text-sm mb-1 line-clamp-1">一个抑郁症患者的自白</h2>
+                                <p class="text-xs text-gray-500">42分钟 · 5天前</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-3 episode-card">
+                                <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full h-24 object-cover rounded-lg mb-2">
+                                <h3 class="font-medium text-sm text-gray-500">忽左忽右</h3>
+                                <h2 class="font-bold text-sm mb-1 line-clamp-1">东京奥运会背后的政治博弈</h2>
+                                <p class="text-xs text-gray-500">68分钟 · 1周前</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-3 episode-card">
+                                <img src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full h-24 object-cover rounded-lg mb-2">
+                                <h3 class="font-medium text-sm text-gray-500">商业就是这样</h3>
+                                <h2 class="font-bold text-sm mb-1 line-clamp-1">瑞幸咖啡如何起死回生</h2>
+                                <p class="text-xs text-gray-500">35分钟 · 3天前</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-3 episode-card">
+                                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full h-24 object-cover rounded-lg mb-2">
+                                <h3 class="font-medium text-sm text-gray-500">宇宙乘客</h3>
+                                <h2 class="font-bold text-sm mb-1 line-clamp-1">当我们谈论太空旅行时在谈论什么</h2>
+                                <p class="text-xs text-gray-500">56分钟 · 2周前</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 热门播客 -->
+                    <div class="px-5 mb-6">
+                        <h2 class="text-lg font-semibold mb-3">热门播客</h2>
+                        <div class="flex space-x-4 overflow-x-auto pb-2">
+                            <div class="flex-shrink-0 w-24 show-card">
+                                <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-24 h-24 rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">文化有限</h3>
+                            </div>
+                            <div class="flex-shrink-0 w-24 show-card">
+                                <img src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-24 h-24 rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">疯投圈</h3>
+                            </div>
+                            <div class="flex-shrink-0 w-24 show-card">
+                                <img src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-24 h-24 rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">随机波动</h3>
+                            </div>
+                            <div class="flex-shrink-0 w-24 show-card">
+                                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-24 h-24 rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">日谈公园</h3>
+                            </div>
+                            <div class="flex-shrink-0 w-24 show-card">
+                                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-24 h-24 rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">故事FM</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部播放条 -->
+                <div class="player-bar">
+                    <img src="https://images.unsplash.com/photo-1593697909683-bccb1b9e68a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                         class="w-12 h-12 rounded-lg object-cover">
+                    <div class="ml-3 flex-1">
+                        <h3 class="font-medium text-sm">科技乱炖</h3>
+                        <h2 class="text-xs text-gray-500">Ep. 245: AI时代的个人发展</h2>
+                    </div>
+                    <div class="flex space-x-4 text-gray-500">
+                        <i class="fas fa-step-backward"></i>
+                        <i class="fas fa-play text-blue-500"></i>
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar">
+                    <div class="tab-item active">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-compass"></i>
+                        <span>发现</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-heart"></i>
+                        <span>订阅</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-user"></i>
+                        <span>我的</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 发现页 -->
+        <div class="phone-mockup">
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                <div class="progress-bar" style="width: 30%;"></div>
+                
+                <div class="h-full overflow-y-auto pb-24">
+                    <!-- 导航栏 -->
+                    <div class="px-5 py-4">
+                        <h1 class="text-2xl font-bold mb-4">发现</h1>
+                        <div class="relative">
+                            <input type="text" placeholder="搜索播客、节目或话题" 
+                                   class="w-full bg-gray-100 rounded-full py-2 px-4 pl-10 text-sm focus:outline-none">
+                            <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- 分类 -->
+                    <div class="px-5 mb-6">
+                        <h2 class="text-lg font-semibold mb-3">分类</h2>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="category-chip bg-white rounded-full py-2 text-center text-sm font-medium shadow-sm">
+                                科技
+                            </div>
+                            <div class="category-chip bg-white rounded-full py-2 text-center text-sm font-medium shadow-sm">
+                                商业
+                            </div>
+                            <div class="category-chip bg-white rounded-full py-2 text-center text-sm font-medium shadow-sm">
+                                文化
+                            </div>
+                            <div class="category-chip bg-white rounded-full py-2 text-center text-sm font-medium shadow-sm">
+                                艺术
+                            </div>
+                            <div class="category-chip bg-white rounded-full py-2 text-center text-sm font-medium shadow-sm">
+                                健康
+                            </div>
+                            <div class="category-chip bg-white rounded-full py-2 text-center text-sm font-medium shadow-sm">
+                                教育
+                            </div>
+                            <div class="category-chip bg-white rounded-full py-2 text-center text-sm font-medium shadow-sm">
+                                娱乐
+                            </div>
+                            <div class="category-chip bg-white rounded-full py-2 text-center text-sm font-medium shadow-sm">
+                                社会
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 热门榜单 -->
+                    <div class="px-5 mb-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h2 class="text-lg font-semibold">热门榜单</h2>
+                            <a href="#" class="text-sm text-blue-500">查看全部</a>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <div class="flex items-center p-3 border-b border-gray-100">
+                                <span class="text-gray-400 text-sm w-6 text-center">1</span>
+                                <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                                     class="w-10 h-10 rounded-lg object-cover ml-2">
+                                <div class="ml-3 flex-1">
+                                    <h3 class="font-medium text-sm">文化有限</h3>
+                                    <p class="text-xs text-gray-500">Vol. 89: 当我们谈论村上春树时</p>
+                                </div>
+                                <i class="fas fa-ellipsis-h text-gray-400"></i>
+                            </div>
+                            <div class="flex items-center p-3 border-b border-gray-100">
+                                <span class="text-gray-400 text-sm w-6 text-center">2</span>
+                                <img src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                                     class="w-10 h-10 rounded-lg object-cover ml-2">
+                                <div class="ml-3 flex-1">
+                                    <h3 class="font-medium text-sm">疯投圈</h3>
+                                    <p class="text-xs text-gray-500">Ep. 45: 2023投资趋势分析</p>
+                                </div>
+                                <i class="fas fa-ellipsis-h text-gray-400"></i>
+                            </div>
+                            <div class="flex items-center p-3">
+                                <span class="text-gray-400 text-sm w-6 text-center">3</span>
+                                <img src="https://images.unsplash.com/photo-1496293455970-f8581aae0e3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                                     class="w-10 h-10 rounded-lg object-cover ml-2">
+                                <div class="ml-3 flex-1">
+                                    <h3 class="font-medium text-sm">随机波动</h3>
+                                    <p class="text-xs text-gray-500">女性主义在2023</p>
+                                </div>
+                                <i class="fas fa-ellipsis-h text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 新上节目 -->
+                    <div class="px-5 mb-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h2 class="text-lg font-semibold">新上节目</h2>
+                            <a href="#" class="text-sm text-blue-500">查看全部</a>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white rounded-xl shadow-sm p-3 episode-card">
+                                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full h-24 object-cover rounded-lg mb-2">
+                                <h3 class="font-medium text-sm text-gray-500">日谈公园</h3>
+                                <h2 class="font-bold text-sm mb-1 line-clamp-1">专访李淼:日本推理小说</h2>
+                                <p class="text-xs text-gray-500">58分钟 · 3小时前</p>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm p-3 episode-card">
+                                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full h-24 object-cover rounded-lg mb-2">
+                                <h3 class="font-medium text-sm text-gray-500">故事FM</h3>
+                                <h2 class="font-bold text-sm mb-1 line-clamp-1">我在阿富汗做记者</h2>
+                                <p class="text-xs text-gray-500">42分钟 · 5小时前</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部播放条 -->
+                <div class="player-bar">
+                    <img src="https://images.unsplash.com/photo-1593697909683-bccb1b9e68a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                         class="w-12 h-12 rounded-lg object-cover">
+                    <div class="ml-3 flex-1">
+                        <h3 class="font-medium text-sm">科技乱炖</h3>
+                        <h2 class="text-xs text-gray-500">Ep. 245: AI时代的个人发展</h2>
+                    </div>
+                    <div class="flex space-x-4 text-gray-500">
+                        <i class="fas fa-step-backward"></i>
+                        <i class="fas fa-play text-blue-500"></i>
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </div>
+                    <div class="tab-item active">
+                        <i class="fas fa-compass"></i>
+                        <span>发现</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-heart"></i>
+                        <span>订阅</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-user"></i>
+                        <span>我的</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 订阅页 -->
+        <div class="phone-mockup">
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                <div class="progress-bar" style="width: 30%;"></div>
+                
+                <div class="h-full overflow-y-auto pb-24">
+                    <!-- 导航栏 -->
+                    <div class="px-5 py-4">
+                        <h1 class="text-2xl font-bold">订阅</h1>
+                    </div>
+                    
+                    <!-- 订阅的播客 -->
+                    <div class="px-5 mb-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h2 class="text-lg font-semibold">我的订阅</h2>
+                            <div class="flex space-x-2">
+                                <button class="text-sm text-blue-500">编辑</button>
+                                <button class="text-sm text-blue-500">添加</button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="show-card">
+                                <img src="https://images.unsplash.com/photo-1593697909683-bccb1b9e68a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full aspect-square rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">科技乱炖</h3>
+                                <p class="text-xs text-gray-500 text-center">1新节目</p>
+                            </div>
+                            <div class="show-card">
+                                <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full aspect-square rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">文化有限</h3>
+                                <p class="text-xs text-gray-500 text-center">2新节目</p>
+                            </div>
+                            <div class="show-card">
+                                <img src="https://images.unsplash.com/photo-1559386484-97dfc0e15539?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full aspect-square rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">疯投圈</h3>
+                                <p class="text-xs text-gray-500 text-center">更新中</p>
+                            </div>
+                            <div class="show-card">
+                                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full aspect-square rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">故事FM</h3>
+                                <p class="text-xs text-gray-500 text-center">1新节目</p>
+                            </div>
+                            <div class="show-card">
+                                <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                                     class="w-full aspect-square rounded-xl object-cover mb-2">
+                                <h3 class="font-bold text-sm text-center line-clamp-1">忽左忽右</h3>
+                                <p class="text-xs text-gray-500 text-center">更新中</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 最新更新 -->
+                    <div class="px-5 mb-6">
+                        <h2 class="text-lg font-semibold mb-3">最新更新</h2>
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <div class="flex items-center p-3 border-b border-gray-100 episode-card">
+                                <img src="https://images.unsplash.com/photo-1593697909683-bccb1b9e68a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                                     class="w-12 h-12 rounded-lg object-cover">
+                                <div class="ml-3 flex-1">
+                                    <h3 class="font-medium text-sm">科技乱炖</h3>
+                                    <h2 class="text-sm font-bold mb-1">Ep. 246: 大模型应用实战</h2>
+                                    <p class="text-xs text-gray-500">今天 · 68分钟</p>
+                                </div>
+                                <i class="fas fa-ellipsis-h text-gray-400"></i>
+                            </div>
+                            <div class="flex items-center p-3 border-b border-gray-100 episode-card">
+                                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                                     class="w-12 h-12 rounded-lg object-cover">
+                                <div class="ml-3 flex-1">
+                                    <h3 class="font-medium text-sm">故事FM</h3>
+                                    <h2 class="text-sm font-bold mb-1">我在阿富汗做记者</h2>
+                                    <p class="text-xs text-gray-500">今天 · 42分钟</p>
+                                </div>
+                                <i class="fas fa-ellipsis-h text-gray-400"></i>
+                            </div>
+                            <div class="flex items-center p-3 episode-card">
+                                <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                                     class="w-12 h-12 rounded-lg object-cover">
+                                <div class="ml-3 flex-1">
+                                    <h3 class="font-medium text-sm">文化有限</h3>
+                                    <h2 class="text-sm font-bold mb-1">Vol. 90: 读《百年孤独》</h2>
+                                    <p class="text-xs text-gray-500">昨天 · 56分钟</p>
+                                </div>
+                                <i class="fas fa-ellipsis-h text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部播放条 -->
+                <div class="player-bar">
+                    <img src="https://images.unsplash.com/photo-1593697909683-bccb1b9e68a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                         class="w-12 h-12 rounded-lg object-cover">
+                    <div class="ml-3 flex-1">
+                        <h3 class="font-medium text-sm">科技乱炖</h3>
+                        <h2 class="text-xs text-gray-500">Ep. 245: AI时代的个人发展</h2>
+                    </div>
+                    <div class="flex space-x-4 text-gray-500">
+                        <i class="fas fa-step-backward"></i>
+                        <i class="fas fa-play text-blue-500"></i>
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-compass"></i>
+                        <span>发现</span>
+                    </div>
+                    <div class="tab-item active">
+                        <i class="fas fa-heart"></i>
+                        <span>订阅</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-user"></i>
+                        <span>我的</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 播放页 -->
+        <div class="phone-mockup">
+            <div class="screen bg-gradient-to-b from-blue-50 to-white">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                <div class="progress-bar" style="width: 30%;"></div>
+                
+                <div class="h-full overflow-y-auto pb-24">
+                    <!-- 导航栏 -->
+                    <div class="px-5 py-4 flex justify-between items-center">
+                        <button class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+                            <i class="fas fa-chevron-down text-gray-500"></i>
+                        </button>
+                        <h1 class="text-lg font-semibold">正在播放</h1>
+                        <button class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+                            <i class="fas fa-ellipsis-h text-gray-500"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 封面 -->
+                    <div class="px-5 mb-8 flex justify-center">
+                        <img src="https://images.unsplash.com/photo-1593697909683-bccb1b9e68a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             class="w-64 h-64 rounded-xl object-cover shadow-lg">
+                    </div>
+                    
+                    <!-- 节目信息 -->
+                    <div class="px-5 mb-6 text-center">
+                        <h2 class="text-xl font-bold mb-1">Ep. 245: AI时代的个人发展</h2>
+                        <h3 class="text-lg text-gray-600 mb-4">科技乱炖</h3>
+                        
+                        <!-- 进度条 -->
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs text-gray-500 mb-1">
+                                <span>32:45</span>
+                                <span>-39:25</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- 控制按钮 -->
+                        <div class="flex justify-center items-center space-x-8 mb-8">
+                            <button class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md">
+                                <i class="fas fa-backward-step text-gray-600"></i>
+                            </button>
+                            <button class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
+                                <i class="fas fa-pause text-white text-2xl"></i>
+                            </button>
+                            <button class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md">
+                                <i class="fas fa-forward-step text-gray-600"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- 附加功能 -->
+                        <div class="flex justify-center space-x-10">
+                            <button class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm mb-1">
+                                    <i class="fas fa-bookmark text-gray-500"></i>
+                                </div>
+                                <span class="text-xs text-gray-500">收藏</span>
+                            </button>
+                            <button class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm mb-1">
+                                    <i class="fas fa-clock-rotate-left text-gray-500"></i>
+                                </div>
+                                <span class="text-xs text-gray-500">30秒</span>
+                            </button>
+                            <button class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm mb-1">
+                                    <i class="fas fa-gauge-high text-gray-500"></i>
+                                </div>
+                                <span class="text-xs text-gray-500">倍速</span>
+                            </button>
+                            <button class="flex flex-col items-center">
+                                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm mb-1">
+                                    <i class="fas fa-share-nodes text-gray-500"></i>
+                                </div>
+                                <span class="text-xs text-gray-500">分享</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 节目描述 -->
+                    <div class="px-5 mb-6">
+                        <div class="bg-white rounded-xl shadow-sm p-4">
+                            <h3 class="font-bold mb-2">节目描述</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                本期我们讨论了在AI技术快速发展的背景下，个人如何规划职业发展路径，哪些技能在未来会变得更重要，以及如何利用AI工具提升个人生产力。嘉宾是一位在AI领域有十年经验的从业者，分享了大量实用建议。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 时间轴评论 -->
+                    <div class="px-5 mb-6">
+                        <h3 class="font-bold mb-3">时间轴评论</h3>
+                        <div class="bg-white rounded-xl shadow-sm p-4">
+                            <div class="flex items-start mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-8 h-8 rounded-full mr-3">
+                                <div>
+                                    <div class="bg-gray-100 rounded-lg p-2">
+                                        <p class="text-sm font-medium">@科技爱好者</p>
+                                        <p class="text-xs">嘉宾提到的AI工具清单太有用了！</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">12:35 · 32赞</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full mr-3">
+                                <div>
+                                    <div class="bg-gray-100 rounded-lg p-2">
+                                        <p class="text-sm font-medium">@产品经理小王</p>
+                                        <p class="text-xs">关于Prompt Engineering的部分很有启发</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">24:10 · 18赞</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-compass"></i>
+                        <span>发现</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-heart"></i>
+                        <span>订阅</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-user"></i>
+                        <span>我的</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 个人中心 -->
+        <div class="phone-mockup">
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="flex space-x-1">
+                        <i class="fas fa-signal"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                </div>
+                <div class="progress-bar" style="width: 30%;"></div>
+                
+                <div class="h-full overflow-y-auto pb-24">
+                    <!-- 用户信息 -->
+                    <div class="px-5 py-6 flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h1 class="text-xl font-bold">张小云</h1>
+                            <p class="text-sm text-gray-500">注册于2022年3月</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 统计信息 -->
+                    <div class="px-5 mb-6">
+                        <div class="bg-white rounded-xl shadow-sm p-4">
+                            <div class="grid grid-cols-3 divide-x">
+                                <div class="text-center">
+                                    <p class="text-sm text-gray-500">收听</p>
+                                    <p class="font-bold">128</p>
+                                    <p class="text-xs text-gray-500">小时</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-sm text-gray-500">订阅</p>
+                                    <p class="font-bold">23</p>
+                                    <p class="text-xs text-gray-500">播客</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-sm text-gray-500">点赞</p>
+                                    <p class="font-bold">56</p>
+                                    <p class="text-xs text-gray-500">次</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 功能列表 -->
+                    <div class="px-5 mb-6">
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <div class="flex items-center p-4 border-b border-gray-100">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-clock-rotate-left text-blue-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium">收听历史</h3>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex items-center p-4 border-b border-gray-100">
+                                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-bookmark text-purple-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium">我的收藏</h3>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex items-center p-4 border-b border-gray-100">
+                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-cloud-arrow-down text-green-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium">已下载</h3>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="flex items-center p-4">
+                                <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-comment-dots text-yellow-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium">我的评论</h3>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 设置 -->
+                    <div class="px-5 mb-6">
+                        <h2 class="text-lg font-semibold mb-3">设置</h2>
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                            <div class="flex items-center p-4 border-b border-gray-100">
+                                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-moon text-gray-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium">夜间模式</h3>
+                                </div>
+                                <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                    <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                    <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 border-b border-gray-100">
+                                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-wifi text-gray-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium">仅WiFi下载</h3>
+                                </div>
+                                <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                    <input type="checkbox" name="toggle" id="toggle2" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked/>
+                                    <label for="toggle2" class="toggle-label block overflow-hidden h-6 rounded-full bg-blue-500 cursor-pointer"></label>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4">
+                                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-bell text-gray-500"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium">新节目通知</h3>
+                                </div>
+                                <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                    <input type="checkbox" name="toggle" id="toggle3" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked/>
+                                    <label for="toggle3" class="toggle-label block overflow-hidden h-6 rounded-full bg-blue-500 cursor-pointer"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部播放条 -->
+                <div class="player-bar">
+                    <img src="https://images.unsplash.com/photo-1593697909683-bccb1b9e68a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" 
+                         class="w-12 h-12 rounded-lg object-cover">
+                    <div class="ml-3 flex-1">
+                        <h3 class="font-medium text-sm">科技乱炖</h3>
+                        <h2 class="text-xs text-gray-500">Ep. 245: AI时代的个人发展</h2>
+                    </div>
+                    <div class="flex space-x-4 text-gray-500">
+                        <i class="fas fa-step-backward"></i>
+                        <i class="fas fa-play text-blue-500"></i>
+                        <i class="fas fa-step-forward"></i>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar">
+                    <div class="tab-item">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-compass"></i>
+                        <span>发现</span>
+                    </div>
+                    <div class="tab-item">
+                        <i class="fas fa-heart"></i>
+                        <span>订阅</span>
+                    </div>
+                    <div class="tab-item active">
+                        <i class="fas fa-user"></i>
+                        <span>我的</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #3B82F6;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #3B82F6;
+        }
+    </style>
+</body>
+</html>
